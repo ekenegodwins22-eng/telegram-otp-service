@@ -76,5 +76,5 @@ def init_db():
     db["linking_codes"].delete_where("expires_at < ?", [datetime.now().isoformat()])
     db["otps"].delete_where("expires_at < ?", [datetime.now().isoformat()])
 
-# Run initialization
-init_db()
+# The init_db() function is now called explicitly in api.py and bot.py
+# to ensure it runs only once per process, preventing database locking.

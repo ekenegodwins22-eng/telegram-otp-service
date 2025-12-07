@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 from datetime import datetime, timedelta
 
 # Import database utilities
-from database import db, generate_linking_code
+from database import db, generate_linking_code, init_db
 
 # Set up logging
 logging.basicConfig(
@@ -89,6 +89,7 @@ async def handle_linking_code(update: Update, context):
 
 
 def main():
+    init_db()
     """Start the bot."""
     if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
         logger.error("FATAL: Please replace 'YOUR_BOT_TOKEN_HERE' with your actual Telegram Bot Token.")

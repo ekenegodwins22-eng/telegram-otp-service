@@ -7,7 +7,7 @@ from telegram import Bot
 from telegram.error import TelegramError
 
 # Import database utilities
-from database import db, hash_secret, verify_secret, generate_linking_code, generate_otp
+from database import db, hash_secret, verify_secret, generate_linking_code, generate_otp, init_db
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 
 # Initialize FastAPI app
+init_db()
 app = FastAPI(title="Multi-Tenant Telegram OTP Service API")
 
 # Initialize Telegram Bot for sending messages
