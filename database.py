@@ -64,13 +64,13 @@ def init_db():
     sample_secret = "super_secret_key_123"
     sample_service_name = "Phoenix Soul Rise"
 
-    if not db["clients"].get(sample_client_id):
-        db["clients"].insert({
-            "client_id": sample_client_id,
-            "client_secret_hash": hash_secret(sample_secret),
-            "service_name": sample_service_name,
-        }, alter=True, replace=True)
-        print(f"Initialized sample client: {sample_client_id} with secret: {sample_secret}")
+    # Ensure the client table exists and the sample client is present
+    db["clients"].insert({
+        "client_id": sample_client_id,
+        "client_secret_hash": hash_secret(sample_secret),
+        "service_name": sample_service_name,
+    }, alter=True, replace=True)
+    print(f"Initialized sample client: {sample_client_id} with secret: {sample_secret}")
     
     # Clean up expired codes/otps on startup
     db["linking_codes"].delete_where("expires_at < ?", [datetime.now().isoformat()])
